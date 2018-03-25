@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:/Cygwin/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++/x86_64-pc-cygwin/",
+                "C:/Cygwin/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++",
+                "C:/Cygwin/lib/gcc/x86_64-pc-cygwin/6.4.0/include/",
+                "C:/Cygwin/usr/include",
+                "C:/Cygwin/usr/local/include",
+                "${workspaceRoot}"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "__gnuc__=6",
+                "__cdecl=__attribute__((__cdecl__))"
+            ],
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "C:/Cygwin/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++/x86_64-pc-cygwin/",
+                    "C:/Cygwin/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++",
+                    "C:/Cygwin/lib/gcc/x86_64-pc-cygwin/6.4.0/include/",
+                    "C:/Cygwin/usr/include",
+                    "C:/Cygwin/usr/local/include",
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 3
+}
