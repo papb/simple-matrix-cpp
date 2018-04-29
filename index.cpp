@@ -29,6 +29,11 @@ class Matrix {
         void print();
         std::string toJSON();
 
+        // Utility setters
+        void zeros();
+        void ones();
+        void unit();
+
         // Arithmetical operators
         Matrix& operator+=(const Matrix& rhs);
         friend Matrix operator+(Matrix const& lhs, Matrix const& rhs);
@@ -144,6 +149,33 @@ std::string Matrix::toJSON() {
 
 // ------------------------------------------------------------------- //
 
+void Matrix::zeros() {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            matrix[i][j] = 0;
+        }
+    }
+}
+void Matrix::ones() {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            matrix[i][j] = 1;
+        }
+    }
+}
+void Matrix::unit() {
+    if (rows != cols) {
+        throw std::invalid_argument("The matrix must be square.");
+    }
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            matrix[i][j] = i == j ? 1 : 0;
+        }
+    }
+}
+
+// ------------------------------------------------------------------- //
+
 Matrix& Matrix::operator+=(const Matrix& rhs) {
     if (rows != rhs.rows || cols != rhs.cols) {
         throw std::invalid_argument("Matrixes must have the same dimensions to be added.");
@@ -182,7 +214,7 @@ bool operator==(const Matrix& lhs, const Matrix& rhs) {
         }
     }
     return true;
-};
+}
 bool operator!=(const Matrix& lhs, const Matrix& rhs) {
     return !(lhs == rhs);
 }
@@ -192,9 +224,11 @@ bool operator!=(const Matrix& lhs, const Matrix& rhs) {
 void test() {
     Matrix m1(3, 3);
     Matrix m2(3, 3);
+    m1.ones();
     m1(0,0) = 10;
+    m2.unit();
     m2(0,0) = 20;
-    m1 += m1;
+    m1 += m2;
     std::cout << m1.toJSON() << "\n";
     std::cout << m2.toJSON() << "\n";
     std::cout << (m1 != m2) << "\n";
