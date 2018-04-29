@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <sstream>
 
 class Matrix {
     private:
@@ -24,33 +25,15 @@ class Matrix {
         int get(int row, int col) const;
         int& operator()(int row, int col);
 
+        // Print
         void print();
+        std::string toJSON();
 
-        // Matrix& operator+=(const Matrix& rhs);
-        // friend Matrix operator+(Matrix const& lhs, Matrix const& rhs);
+        // Arithmetical operators
+        Matrix& operator+=(const Matrix& rhs);
+        friend Matrix operator+(Matrix const& lhs, Matrix const& rhs);
+        Matrix operator-() const;
 };
-
-// Matrix& operator+=(const Matrix& rhs) {
-//     /* addition of rhs to *this takes place here */
-//     return *this; // return the result by reference
-// }
-// Matrix operator+(Matrix const& lhs, const Matrix& rhs) {
-//     Matrix result = lhs;
-//     lhs += rhs; // reuse compound assignment
-//     return lhs; // return the result by value (uses move constructor)
-// }
-// Matrix operator+(Matrix const& lhs, Matrix const& rhs) {
-//     if (lhs.rows != rhs.rows || lhs.cols != rhs.cols) {
-//         throw std::invalid_argument("Matrixes must have the same dimensions to be added.");
-//     }
-//     Matrix result(lhs.rows, lhs.cols);
-//     for (int i = 0; i < lhs.rows; i++) {
-//         for (int j = 0; j < lhs.cols; j++) {
-//             result(i,j) = lhs.get(i,j) + rhs.get(i,j);
-//         }
-//     }
-//     return result;
-// };
 
 // ------------------------------------------------------------------- //
 
@@ -138,16 +121,63 @@ void Matrix::print() {
         std::cout << "\n";
     }
 }
+std::string Matrix::toJSON() {
+    std::ostringstream oss;
+    oss << "[";
+    for (int i = 0; i < rows; i++) {
+        oss << "[" << matrix[i][0];
+        for (int j = 1; j < cols; j++) {
+            oss << "," << matrix[i][j];
+        }
+        oss << "]";
+        if (i != rows - 1) {
+            oss << ",";
+        }
+    }
+    oss << "]";
+    return oss.str();
+}
+
+// ------------------------------------------------------------------- //
+
+Matrix& Matrix::operator+=(const Matrix& rhs) {
+    if (rows != rhs.rows || cols != rhs.cols) {
+        throw std::invalid_argument("Matrixes must have the same dimensions to be added.");
+    }
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            matrix[i][j] += rhs.matrix[i][j];
+        }
+    }
+
+    return *this;
+}
+Matrix operator+(Matrix const& lhs, const Matrix& rhs) {
+    Matrix result(lhs);
+    result += rhs;
+    return result;
+}
+Matrix Matrix::operator-() const {
+    Matrix result(rows, cols);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            matrix[i][j] = -this->matrix[i][j];
+        }
+    }
+    return result;
+}
 
 // ------------------------------------------------------------------- //
 
 void test() {
     Matrix m1(3, 3);
-    Matrix m2(3, 3);
+    Matrix m2(2, 2);
     m1(0,0) = 10;
     m2(0,0) = 20;
-    m1.print();
-    m2.print();
+    m1 = -m2;
+    std::cout << m1.toJSON() << "\n";
+    std::cout << m2.toJSON() << "\n";
 }
 
 int main(int argc, char **argv) {
