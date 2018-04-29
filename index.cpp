@@ -198,7 +198,7 @@ Matrix Matrix::operator-() const {
     Matrix result(rows, cols);
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            matrix[i][j] = -this->matrix[i][j];
+            result.matrix[i][j] = -this->matrix[i][j];
         }
     }
     return result;
