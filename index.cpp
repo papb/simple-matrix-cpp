@@ -38,6 +38,8 @@ class Matrix {
         Matrix& operator+=(const Matrix& rhs);
         friend Matrix operator+(Matrix const& lhs, Matrix const& rhs);
         Matrix operator-() const;
+        Matrix& operator-=(const Matrix& rhs);
+        friend Matrix operator-(Matrix const& lhs, Matrix const& rhs);
         Matrix operator~() const;
 
         // Comparison operators
@@ -202,6 +204,15 @@ Matrix Matrix::operator-() const {
             result.matrix[i][j] = -this->matrix[i][j];
         }
     }
+    return result;
+}
+Matrix& Matrix::operator-=(const Matrix& rhs) {
+    *this += -rhs;
+    return *this;
+}
+Matrix operator-(Matrix const& lhs, const Matrix& rhs) {
+    Matrix result(lhs);
+    result -= rhs;
     return result;
 }
 Matrix Matrix::operator~() const {
