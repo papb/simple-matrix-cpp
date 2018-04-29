@@ -5,7 +5,7 @@
 class Matrix {
     private:
 
-        int** matrix;
+        double** matrix;
         int rows;
         int cols;
 
@@ -22,8 +22,8 @@ class Matrix {
         // Basic getters
         int getRows() const;
         int getCols() const;
-        int get(int row, int col) const;
-        int& operator()(int row, int col);
+        double get(int row, int col) const;
+        double& operator()(int row, int col);
 
         // Print
         void print();
@@ -43,9 +43,9 @@ class Matrix {
 
 Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
     std::cout << "Matrix constructor called\n";
-    matrix = new int*[rows];
+    matrix = new double*[rows];
     for (int i = 0; i < rows; i++) {
-        matrix[i] = new int[cols];
+        matrix[i] = new double[cols];
         for (int j = 0; j < cols; j++) {
             matrix[i][j] = 0;
         }
@@ -54,9 +54,9 @@ Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
 
 Matrix::Matrix(const Matrix& that) : rows(that.rows), cols(that.cols) {
     std::cout << "Matrix copy constructor called\n";
-    matrix = new int*[rows];
+    matrix = new double*[rows];
     for (int i = 0; i < rows; i++) {
-        matrix[i] = new int[cols];
+        matrix[i] = new double[cols];
         for (int j = 0; j < cols; j++) {
             matrix[i][j] = that.matrix[i][j];
         }
@@ -80,9 +80,9 @@ Matrix& Matrix::operator=(const Matrix& that) {
         cols = that.cols;
 
         // Get the new resources
-        matrix = new int*[rows];
+        matrix = new double*[rows];
         for (int i = 0; i < rows; i++) {
-            matrix[i] = new int[cols];
+            matrix[i] = new double[cols];
             for (int j = 0; j < cols; j++) {
                 matrix[i][j] = that.matrix[i][j];
             }
@@ -105,11 +105,11 @@ int Matrix::getRows() const {
 int Matrix::getCols() const {
     return cols;
 }
-int Matrix::get(int row, int col) const {
+double Matrix::get(int row, int col) const {
     if (rows <= row || cols <= col) throw std::invalid_argument("Index out of bounds.");
     return matrix[row][col];
 }
-int& Matrix::operator()(int row, int col) {
+double& Matrix::operator()(int row, int col) {
     if (rows <= row || cols <= col) throw std::invalid_argument("Index out of bounds.");
     return matrix[row][col];
 }
