@@ -38,6 +38,7 @@ class Matrix {
         Matrix& operator+=(const Matrix& rhs);
         friend Matrix operator+(Matrix const& lhs, Matrix const& rhs);
         Matrix operator-() const;
+        Matrix operator~() const;
 
         // Comparison operators
         friend bool operator==(const Matrix& lhs, const Matrix& rhs);
@@ -203,6 +204,15 @@ Matrix Matrix::operator-() const {
     }
     return result;
 }
+Matrix Matrix::operator~() const {
+    Matrix result(cols, rows);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            result.matrix[j][i] = this->matrix[i][j];
+        }
+    }
+    return result;
+}
 
 // ------------------------------------------------------------------- //
 
@@ -232,6 +242,10 @@ void test() {
     std::cout << m1.toJSON() << "\n";
     std::cout << m2.toJSON() << "\n";
     std::cout << (m1 != m2) << "\n";
+
+    Matrix m3(4, 1);
+    std::cout << m3.toJSON() << "\n";
+    std::cout << (~m3).toJSON() << "\n";
 }
 
 int main(int argc, char **argv) {
