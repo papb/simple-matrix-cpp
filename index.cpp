@@ -5,7 +5,7 @@
 class Matrix {
     private:
 
-        double** matrix;
+        double** matrix; // Matrix is stored as a pointer to pointers
         int rows;
         int cols;
 
@@ -14,7 +14,7 @@ class Matrix {
         // Constructor
         Matrix(int rows, int cols);
 
-        // Rule of Three
+        // Rule of Three (with copy-and-swap idiom)
         Matrix(const Matrix& that);
         Matrix& operator=(Matrix that);
         ~Matrix();
@@ -24,7 +24,6 @@ class Matrix {
         int getRows() const;
         int getCols() const;
         double get(int row, int col) const;
-        double& operator()(int row, int col);
 
         // Print
         void prettyPrint() const;
@@ -46,9 +45,11 @@ class Matrix {
         friend Matrix operator*(Matrix const& lhs, Matrix const& rhs);
         Matrix operator~() const;
 
-        // Comparison operators
+        // Other operators
         friend bool operator==(const Matrix& lhs, const Matrix& rhs);
         friend bool operator!=(const Matrix& lhs, const Matrix& rhs);
+        double& operator()(int row, int col);
+
 };
 
 // ------------------------------------------------------------------- //
