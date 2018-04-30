@@ -41,6 +41,8 @@ class Matrix {
         Matrix operator-() const;
         Matrix& operator-=(const Matrix& rhs);
         friend Matrix operator-(Matrix const& lhs, Matrix const& rhs);
+        Matrix& operator*=(const Matrix& rhs);
+        friend Matrix operator*(Matrix const& lhs, Matrix const& rhs);
         Matrix operator~() const;
 
         // Comparison operators
@@ -202,6 +204,27 @@ Matrix operator-(Matrix const& lhs, const Matrix& rhs) {
     result -= rhs;
     return result;
 }
+Matrix& Matrix::operator*=(const Matrix& rhs) {
+    if (this->cols != rhs.rows) {
+        throw std::invalid_argument("The matrices do not have compatible dimensions for multiplication.");
+    }
+    Matrix temp(this->rows, rhs.cols);
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < rhs.cols; j++) {
+            temp.matrix[i][j] = 0;
+            for (int k = 0; k < cols; k++) {
+                temp.matrix[i][j] += this->matrix[i][k] * rhs.matrix[k][j];
+            }
+        }
+    }
+    swap(*this, temp);
+    return *this;
+}
+Matrix operator*(Matrix const& lhs, const Matrix& rhs) {
+    Matrix result(lhs);
+    result *= rhs;
+    return result;
+}
 Matrix Matrix::operator~() const {
     Matrix result(cols, rows);
     for (int i = 0; i < rows; i++) {
@@ -230,13 +253,16 @@ bool operator!=(const Matrix& lhs, const Matrix& rhs) {
 // ------------------------------------------------------------------- //
 
 void test() {
-    Matrix m1(3, 3);
-    Matrix m2(2, 2);
+    Matrix m1(3, 1);
+    Matrix m2(1, 3);
+    Matrix m3(3, 3);
     m1.ones();
-    m2.unit();
-    m1 = m2;
+    m2.ones();
+    m3.ones();
     std::cout << m1.toJSON() << "\n";
     std::cout << m2.toJSON() << "\n";
+    std::cout << m3.toJSON() << "\n";
+    std::cout << (m1 * m2 == m3) << "\n";
 }
 
 int main(int argc, char **argv) {
