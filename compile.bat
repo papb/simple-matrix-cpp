@@ -1,2 +1,2 @@
 @echo OFF
-g++ index.cpp -o index.exe
+g++ index.cpp matrix.cpp -o index.exe
