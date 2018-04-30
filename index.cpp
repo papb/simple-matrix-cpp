@@ -54,7 +54,6 @@ class Matrix {
 // ------------------------------------------------------------------- //
 
 Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
-    std::cout << "Matrix constructor called\n";
     matrix = new double*[rows];
     for (int i = 0; i < rows; i++) {
         matrix[i] = new double[cols];
@@ -65,7 +64,6 @@ Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
 }
 
 Matrix::Matrix(const Matrix& that) : rows(that.rows), cols(that.cols) {
-    std::cout << "Matrix copy constructor called\n";
     matrix = new double*[rows];
     for (int i = 0; i < rows; i++) {
         matrix[i] = new double[cols];
@@ -82,7 +80,6 @@ void swap(Matrix& a, Matrix& b) {
 }
 
 Matrix& Matrix::operator=(Matrix that) {
-    std::cout << "Matrix copy assignment operator called\n";
     // Using copy-and-swap idiom
     // https://stackoverflow.com/a/3279550/4135063
     swap(*this, that);
@@ -90,7 +87,6 @@ Matrix& Matrix::operator=(Matrix that) {
 }
 
 Matrix::~Matrix() {
-    std::cout << "Matrix destructor called\n";
     for (int i = 0; i < rows; i++) delete [] matrix[i];
     delete [] matrix;
 }
@@ -257,16 +253,9 @@ bool operator!=(const Matrix& lhs, const Matrix& rhs) {
 // ------------------------------------------------------------------- //
 
 void test() {
-    Matrix m1(3, 1);
-    Matrix m2(1, 3);
-    Matrix m3(3, 3);
+    Matrix m1(3, 2);
     m1.ones();
-    m2.ones();
-    m3.ones();
-    std::cout << m1.toJSON() << "\n";
-    std::cout << m2.toJSON() << "\n";
-    std::cout << m3.toJSON() << "\n";
-    std::cout << (m1 * m2 == m3) << "\n";
+    std::cout << m1 << "\n";
 }
 
 int main(int argc, char **argv) {
