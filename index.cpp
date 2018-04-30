@@ -27,7 +27,7 @@ class Matrix {
         double& operator()(int row, int col);
 
         // Print
-        void print() const;
+        void prettyPrint() const;
         std::string toJSON() const;
         friend std::ostream& operator<<(std::ostream& stream, const Matrix& matrix);
 
@@ -114,7 +114,7 @@ double& Matrix::operator()(int row, int col) {
 
 // ------------------------------------------------------------------- //
 
-void Matrix::print() const {
+void Matrix::prettyPrint() const {
     for (int i = 0; i < rows; i++) {
         std::cout << matrix[i][0];
         for (int j = 1; j < cols; j++) {
