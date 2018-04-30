@@ -181,7 +181,7 @@ void Matrix::unit() {
 
 Matrix& Matrix::operator+=(const Matrix& rhs) {
     if (rows != rhs.rows || cols != rhs.cols) {
-        throw std::invalid_argument("Matrixes must have the same dimensions to be added.");
+        throw std::invalid_argument("Matrices must have the same dimensions to be added.");
     }
 
     for (int i = 0; i < rows; i++) {
