@@ -16,8 +16,9 @@ class Matrix {
 
         // Rule of Three
         Matrix(const Matrix& that);
-        Matrix& operator=(const Matrix& that);
+        Matrix& operator=(Matrix that);
         ~Matrix();
+        friend void swap(Matrix& a, Matrix& b);
 
         // Basic getters
         int getRows() const;
@@ -71,31 +72,17 @@ Matrix::Matrix(const Matrix& that) : rows(that.rows), cols(that.cols) {
     }
 }
 
-Matrix& Matrix::operator=(const Matrix& that) {
+void swap(Matrix& a, Matrix& b) {
+    std::swap(a.rows, b.rows);
+    std::swap(a.cols, b.cols);
+    std::swap(a.matrix, b.matrix);
+}
+
+Matrix& Matrix::operator=(Matrix that) {
     std::cout << "Matrix copy assignment operator called\n";
-
-    // TODO - Known issue: This copy assignment implementation
-    // is dangerous because if the attempt to get the new resource
-    // throws, this object will be left in an invalid state.
-
-    if (this != &that) {
-        // Free the old matrix pointers
-        for (int i = 0; i < rows; i++) delete [] matrix[i];
-        delete [] matrix;
-
-        // Set the new rows & cols
-        rows = that.rows;
-        cols = that.cols;
-
-        // Get the new resources
-        matrix = new double*[rows];
-        for (int i = 0; i < rows; i++) {
-            matrix[i] = new double[cols];
-            for (int j = 0; j < cols; j++) {
-                matrix[i][j] = that.matrix[i][j];
-            }
-        }
-    }
+    // Using copy-and-swap idiom
+    // https://stackoverflow.com/a/3279550/4135063
+    swap(*this, that);
     return *this;
 }
 
@@ -244,19 +231,12 @@ bool operator!=(const Matrix& lhs, const Matrix& rhs) {
 
 void test() {
     Matrix m1(3, 3);
-    Matrix m2(3, 3);
+    Matrix m2(2, 2);
     m1.ones();
-    m1(0,0) = 10;
     m2.unit();
-    m2(0,0) = 20;
-    m1 += m2;
+    m1 = m2;
     std::cout << m1.toJSON() << "\n";
     std::cout << m2.toJSON() << "\n";
-    std::cout << (m1 != m2) << "\n";
-
-    Matrix m3(4, 1);
-    std::cout << m3.toJSON() << "\n";
-    std::cout << (~m3).toJSON() << "\n";
 }
 
 int main(int argc, char **argv) {
