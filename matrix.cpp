@@ -6,6 +6,8 @@
 // ------------------------------------------------------------------- //
 
 Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
+    if (rows < 1) throw std::invalid_argument("There must be at least one row.");
+    if (cols < 1) throw std::invalid_argument("There must be at least one column.");
     matrix = new double*[rows];
     for (int i = 0; i < rows; i++) {
         matrix[i] = new double[cols];
