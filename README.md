@@ -1,10 +1,10 @@
 # Matrix.h
 
-Biblioteca simples de manipulação de matrizes de valores `double` em C++.
+Simple library for manipulating matrices of `double` values in C++.
 
 ## Quick Start
 
-Obtenha os arquivos `matrix.cpp` e `matrix.h`, e use:
+Obtain the files `matrix.cpp` and `matrix.h`, and use:
 
 ```c++
 #include "matrix.h"
@@ -25,31 +25,31 @@ int main(int argc, char **argv) {
 }
 ```
 
-## Documentação completa
+## Complete documentation
 
 ### Construtor
 
-O único construtor disponível recebe dois parâmetros inteiros, o número de linhas e o número de colunas (nessa ordem). Caso algum deles seja menor que 1, uma exceção do tipo `std::invalid_argument` será lançada. A matriz resultante automaticamente tem todas suas entradas inicializadas em zero.
+The only available constructor receives two int parameters, the number of lines and the number of columns (in this order). If one of them is less than 1, an `std::invalid_argument` exception will be thrown. The resulting matrix automatically has all its entries initialized to zero.
 
-Se não houver espaço suficiente em memória para inicialização, será lançada uma exceção do tipo `std::bad_alloc` (como de costume).
+If there is not enough memory space for the initialization, an `std::bad_alloc` will be thrown (as usual).
 
-### Construtor cópia, atribuição cópia, destrutor e swap
+### Copy constructor, copy assignment, destructor and swap
 
-Internamente, a matriz é armazenada usando um ponteiro para vetor de ponteiros para double. A implementação segue o padrão da [Rule of Three](https://en.wikipedia.org/wiki/Rule_of_three_(C%2B%2B_programming)), portanto o usuário pode ficar tranquilo que não há nenhum *leaking* de memória ocorrendo.
+Internally, the matrix is stored using a pointer to an array of pointers to `double`. The implementation follows the pattern of the [Rule of Three](https://en.wikipedia.org/wiki/Rule_of_three_(C%2B%2B_programming)), therefore the user can rest assured that there is no nmemory leak happening.
 
-Portanto, tanto o construtor cópia quanto o operador de atribuição por cópia (`operator=`) são disponibilizados normalmente. O destrutor também está implementado e garante que não haja *leaks* de memória.
+Therefore, both the copy constructor and the copy assignment operator (`operator=`) are available normally. The destructor is also implemented and guarantees that there are no memory leaks.
 
-Além disso, para a implementação adequada destes métodos, foi utilizado o [copy-and-swap idiom](https://stackoverflow.com/questions/3279543), e sendo assim fica automaticamente disponibilizado mais um método bastante útil para o usuário, o `void swap(Matrix& a, Matrix& b)`, para fazer o swap de duas matrizes.
+Besides, for the adequate implementation of these methods, the [copy-and-swap idiom](https://stackoverflow.com/questions/3279543) was used. Thus, yet another method is also available for the user: the `void swap(Matrix& a, Matrix& b)`, to swap two matrices.
 
-### Getters e setters básicos
+### Basic getters and setters
 
-Os seguintes *getters* básicos são disponibilizados:
+The following basic getters are available:
 
-* `int Matrix::getRows() const;` que retorna o número de linhas da matriz.
-* `int Matrix::getCols() const;` que retorna o número de colunas da matriz.
-* `double get(int row, int col) const;` que retorna o conteúdo da célula na linha `row` e coluna `col`.
+* `int Matrix::getRows() const;` which returns the amount of rows of the matrix.
+* `int Matrix::getCols() const;` which returns the amount of columns of the matrix.
+* `double get(int row, int col) const;` which returns the value present int the cell at row `row` and column `col`.
 
-O operador `()` também é sobrecarregado para leitura de conteúdo, como no método `get()`, com a única diferença de que ele não é `const`, pois o mesmo operador pode ser usado como setter do conteúdo daquela célula, como no exemplo a seguir:
+The operator `()` is also overloaded for cell value inspection, just like in the `get()` method, with the only difference being that it is not `const`, since the same `operator() can also be used as a setter for the content of a cell, as in the following example:
 
 ```c++
 Matrix m(3, 4);
@@ -61,17 +61,17 @@ std::cout << m.get(1, 2) << "\n"; // 5
 std::cout << m(1, 2) << "\n"; // 5
 ```
 
-Além disso, os seguintes *setters* também estão disponíveis:
+The following setters are also available:
 
-* `void zeros()`: altera todas as células da matriz para 0.
-* `void ones()`: altera todas as células da matriz para 1.
-* `void unit()`: se a matriz for quadrada, altera-a para a matriz unidade, isto é, altera todas as células da diagonal principal para 1 e o restante para 0. Caso a matriz não seja quadrada, uma exceção do tipo `std::logic_error` é lançada.
+* `void zeros()`: sets all cells of the matrix to 0.
+* `void ones()`: sets all cells of the matrix to 1.
+* `void unit()`: if it is a square matrix, it is set to the unit matrix, i.e., every cell in the main diagonal is set to 1 and the other cells are set to 0. If the matrix is not square, a `std::logic_error` is thrown.
 
-### Conversão para string e print
+### String conversion and printing
 
-Para conversão para string, o método `std::string toJSON() const` é disponibilizada, em que a representação da matriz em formato JSON é retornada como string.
+To convert a matrix to a string format, the method `std::string toJSON() const` is provided, which returns the representation of the matrix as a JSON string.
 
-Além disso, a sobrecarga do operador `<<` está disponível como de costume, que automaticamente converte a matriz para string usando o método `toJSON()`:
+Also, the appropriate overloading of the operator `<<` is provided as usual, which automatically converts the matrix to string using the `toJSON()` method mentioned above.
 
 ```c++
 Matrix m(2, 2);
@@ -79,18 +79,18 @@ m.unit();
 std::cout << m; // "[[1,0],[0,1]]"
 ```
 
-Também está disponível o método `void prettyPrint() const`, que printa o conteúdo da matriz de forma legível, linha por linha, com os valores arredondados para duas casas decimais.
+Another method, `void prettyPrint() const`, is also provided, which prints to `std::cout` the contents of the matrix in a readable manner, line per line, with the values rounded to two decimal places.
 
-### Operadores de comparação
+### Comparison operators
 
-Os operadores `==` e `!=` foram sobrecarregados. Duas matrizes são consideradas iguais se e somente se têm dimensões iguais e conteúdos iguais, célula por célula.
+The operators `==` and `!=` were overloaded and are available. Two matrices are considered equal if and only if they have equal dimensions and equal contents on each cell.
 
-### Operadores aritméticos
+### Arithmetic operators
 
-Os operadores de soma (`+`, `+=`), subtração (`-` unário, `-` binário, `-=`) e multiplicação de matrizes (`*`, `*=`) estão disponíveis. A tentativa de operar com matrizes de forma inválida (por exemplo, somando matrizes de dimensões diferentes) causará o lançamento de uma exceção.
+The addition (`+`, `+=`), subtraction (unary `-`, binary `-`, `-=`) and matrix multiplication (`*`, `*=`) operators are available. Any attempt to operate with matrices in an invalid way (e.g. adding matrices of different dimensions) will cause an exception to be thrown.
 
-Além disso, o operador unário `~` foi sobrecarregado para retornar a matriz transposta da matriz dada.
+Also, the unary operator `~` is also available to obtain the transpose of the given matrix.
 
-### Licensa
+### License
 
 MIT © Pedro Augusto de Paula Barbosa
