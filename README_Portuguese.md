@@ -69,7 +69,7 @@ Além disso, os seguintes *setters* também estão disponíveis:
 
 ### Conversão para string e print
 
-Para conversão para string, o método `std::string toJSON() const` é disponibilizada, em que a representação da matriz em formato JSON é retornada como string.
+Para conversão para string, o método `std::string toJSON() const` é disponibilizada, em que a representação da matriz em formato [JSON](https://en.wikipedia.org/wiki/JSON) é retornada como string.
 
 Além disso, a sobrecarga do operador `<<` está disponível como de costume, que automaticamente converte a matriz para string usando o método `toJSON()`:
 

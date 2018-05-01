@@ -69,7 +69,7 @@ The following setters are also available:
 
 ### String conversion and printing
 
-To convert a matrix to a string format, the method `std::string toJSON() const` is provided, which returns the representation of the matrix as a JSON string.
+To convert a matrix to a string format, the method `std::string toJSON() const` is provided, which returns the representation of the matrix as a [JSON](https://en.wikipedia.org/wiki/JSON) string.
 
 Also, the appropriate overloading of the operator `<<` is provided as usual, which automatically converts the matrix to string using the `toJSON()` method mentioned above.
 
@@ -79,7 +79,7 @@ m.unit();
 std::cout << m; // "[[1,0],[0,1]]"
 ```
 
-Another method, `void prettyPrint() const`, is also provided, which prints to `std::cout` the contents of the matrix in a readable manner, line per line, with the values rounded to two decimal places.
+Another method, `void prettyPrint() const`, is also provided, which prints to `std::cout` the contents of the matrix in a readable manner, line by line, with the values rounded to two decimal places.
 
 ### Comparison operators
 
