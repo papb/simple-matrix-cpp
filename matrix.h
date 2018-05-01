@@ -7,6 +7,8 @@ class Matrix {
         int rows;
         int cols;
 
+        static std::string prettyPrintHelper(double d);
+
     public:
 
         // Constructor

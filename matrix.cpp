@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <sstream>
+#include <iomanip>
 #include "matrix.h"
 
 // ------------------------------------------------------------------- //
@@ -64,11 +65,19 @@ double& Matrix::operator()(int row, int col) {
 
 // ------------------------------------------------------------------- //
 
+std::string Matrix::prettyPrintHelper(double d) {
+    std::ostringstream ss1;
+    ss1 << std::fixed << std::setprecision(2) << d;
+    std::string temp = ss1.str();
+    std::ostringstream ss2;
+    ss2 << std::setw(8) << temp;
+    return ss2.str();
+}
 void Matrix::prettyPrint() const {
     for (int i = 0; i < rows; i++) {
-        std::cout << matrix[i][0];
-        for (int j = 1; j < cols; j++) {
-            std::cout << " " << matrix[i][j];
+        for (int j = 0; j < cols; j++) {
+            if (j > 0) std::cout << " ";
+            std::cout << Matrix::prettyPrintHelper(matrix[i][j]);
         }
         std::cout << "\n";
     }
