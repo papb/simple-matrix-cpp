@@ -111,7 +111,7 @@ void Matrix::ones() {
 }
 void Matrix::unit() {
     if (rows != cols) {
-        throw std::invalid_argument("The matrix must be square.");
+        throw std::logic_error("The matrix must be square.");
     }
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
