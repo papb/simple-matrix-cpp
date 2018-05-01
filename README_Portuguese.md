@@ -87,7 +87,7 @@ Os operadores `==` e `!=` foram sobrecarregados. Duas matrizes são consideradas
 
 ### Operadores aritméticos
 
-Os operadores de soma (`+`, `+=`), subtração (`-` unário, `-` binário, `-=`) e multiplicação de matrizes (`*`, `*=`) estão disponíveis. A tentativa de operar com matrizes de forma inválida (por exemplo, somando matrizes de dimensões diferentes) causará o lançamento de uma exceção.
+Os operadores de soma (`+`, `+=`), subtração (`-` unário, `-` binário, `-=`) e multiplicação de matrizes (`*`, `*=`) estão disponíveis. A tentativa de operar com matrizes de forma inválida (por exemplo, somando matrizes de dimensões diferentes) causará o lançamento de uma exceção do tipo `std::invalid_argument`.
 
 Além disso, o operador unário `~` foi sobrecarregado para retornar a matriz transposta da matriz dada.
 

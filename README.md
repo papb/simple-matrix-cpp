@@ -87,7 +87,7 @@ The operators `==` and `!=` were overloaded and are available. Two matrices are 
 
 ### Arithmetic operators
 
-The addition (`+`, `+=`), subtraction (unary `-`, binary `-`, `-=`) and matrix multiplication (`*`, `*=`) operators are available. Any attempt to operate with matrices in an invalid way (e.g. adding matrices of different dimensions) will cause an exception to be thrown.
+The addition (`+`, `+=`), subtraction (unary `-`, binary `-`, `-=`) and matrix multiplication (`*`, `*=`) operators are available. Any attempt to operate with matrices in an invalid way (e.g. adding matrices of different dimensions) will cause an `std::invalid_argument` exception to be thrown.
 
 Also, the unary operator `~` is also available to obtain the transpose of the given matrix.
 
