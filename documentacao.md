@@ -39,7 +39,7 @@ Internamente, a matriz é armazenada usando um ponteiro para vetor de ponteiros 
 
 Portanto, tanto o construtor cópia quanto o operador de atribuição por cópia (`operator=`) são disponibilizados normalmente. O destrutor também está implementado e garante que não haja *leaks* de memória.
 
-Além disso, para a implementação adequada destes métodos, foi utilizado o [copy-and-swap idiom](https://stackoverflow.com/questions/3279543), e sendo assim fica automaticamente disponibilizado mais um método bastante útil para o usuário, o `swap`, para fazer o swap de duas matrizes.
+Além disso, para a implementação adequada destes métodos, foi utilizado o [copy-and-swap idiom](https://stackoverflow.com/questions/3279543), e sendo assim fica automaticamente disponibilizado mais um método bastante útil para o usuário, o `void swap(Matrix& a, Matrix& b)`, para fazer o swap de duas matrizes.
 
 ### Getters e setters básicos
 
@@ -80,3 +80,17 @@ std::cout << m; // "[[1,0],[0,1]]"
 ```
 
 Também está disponível o método `void prettyPrint() const`, que printa o conteúdo da matriz de forma legível, linha por linha, com os valores arredondados para duas casas decimais.
+
+### Operadores de comparação
+
+Os operadores `==` e `!=` foram sobrecarregados. Duas matrizes são consideradas iguais se e somente se têm dimensões iguais e conteúdos iguais, célula por célula.
+
+### Operadores aritméticos
+
+Os operadores de soma (`+`, `+=`), subtração (`-` unário, `-` binário, `-=`) e multiplicação de matrizes (`*`, `*=`) estão disponíveis. A tentativa de operar com matrizes de forma inválida (por exemplo, somando matrizes de dimensões diferentes) causará o lançamento de uma exceção.
+
+Além disso, o operador unário `~` foi sobrecarregado para retornar a matriz transposta da matriz dada.
+
+### Licensa
+
+MIT © Pedro Augusto de Paula Barbosa
