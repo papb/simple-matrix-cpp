@@ -91,6 +91,6 @@ The addition (`+`, `+=`), subtraction (unary `-`, binary `-`, `-=`) and matrix m
 
 Also, the unary operator `~` is also available to obtain the transpose of the given matrix.
 
-### License
+## License
 
 MIT © Pedro Augusto de Paula Barbosa

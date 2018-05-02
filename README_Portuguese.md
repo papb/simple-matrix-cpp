@@ -91,6 +91,6 @@ Os operadores de soma (`+`, `+=`), subtração (`-` unário, `-` binário, `-=`)
 
 Além disso, o operador unário `~` foi sobrecarregado para retornar a matriz transposta da matriz dada.
 
-### Licensa
+## Licensa
 
 MIT © Pedro Augusto de Paula Barbosa
