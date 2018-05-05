@@ -1,3 +1,6 @@
+#ifndef MATRIX_H
+#define MATRIX_H
+
 #include <iostream>
 
 class Matrix {
@@ -51,3 +54,5 @@ class Matrix {
         double& operator()(int row, int col);
 
 };
+
+#endif
