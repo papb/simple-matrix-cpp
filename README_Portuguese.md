@@ -2,7 +2,7 @@
 
 Biblioteca simples de manipulação de matrizes de valores `double` em C++.
 
-Uma tradução deste README para Inglês (*English*) está disponível em [README.md][README.md].
+Uma tradução deste README para Inglês (*English*) está disponível em [README.md](README.md).
 
 ## Quick Start
 

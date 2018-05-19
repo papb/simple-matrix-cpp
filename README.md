@@ -2,7 +2,7 @@
 
 Simple library for manipulating matrices of `double` values in C++.
 
-A translation of this README to Portuguese (*Português*) is available on [README_Portuguese.md][README_Portuguese.md].
+A translation of this README to Portuguese (*Português*) is available on [README_Portuguese.md](README_Portuguese.md).
 
 ## Quick Start
 
